@@ -63,7 +63,7 @@ import de.tudarmstadt.ukp.inception.kb.model.KnowledgeBase;
 
 public class KnowledgeBaseExporterTest
 {
-    private static final String TestURLEndpoint = "https://collection.britishmuseum.org/sparql";
+    private static final String Test_URL_End_Point = "https://collection.britishmuseum.org/sparql";
 
     private @Mock KnowledgeBaseService kbService;
     private @Mock AnnotationSchemaService schemaService;
