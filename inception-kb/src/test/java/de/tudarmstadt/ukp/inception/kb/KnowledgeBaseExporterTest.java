@@ -93,7 +93,7 @@ public class KnowledgeBaseExporterTest
         when(kbService.getKnowledgeBases(sourceProject)).thenReturn(knowledgeBases());
 
         when(kbService.getKnowledgeBaseConfig(any()))
-            .thenReturn(new SPARQLRepositoryConfig(TestURLEndpoint));
+            .thenReturn(new SPARQLRepositoryConfig(Test_URL_End_Point));
 
         when(schemaService.listAnnotationFeature(sourceProject)).thenReturn(features(sourceProject));
 
