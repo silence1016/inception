@@ -19,5 +19,5 @@ package de.tudarmstadt.ukp.inception.recommendation.model;
 
 public enum RecommenderEvaluationScoreMetricEnum
 {
-    Accuracy, Precision, F1, Recall
+    ACCURACY, PRECISION, F1, RECALL
 }
