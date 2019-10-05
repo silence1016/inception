@@ -462,7 +462,7 @@
     events = [];
     for (sel in eventsObj) {
       functionName = eventsObj[sel];
-      _ref1 = sel.split(' '), selector = 2 <= _ref1.length ? __slice.call(_ref1, 0, _k = _ref1.length - 1) : (_k = 0, []), event = _ref1[_k++];
+      _ref1 = sel.split(' '), selector = 2 <= _ref1.length ? __slice.call(_ref1, 0, _k = _ref1.length - 1) : (_k, []), event = _ref1[_k++];
       events.push({
         selector: selector.join(' '),
         event: event,
@@ -1638,7 +1638,7 @@
 
     Editor.prototype.setupDraggables = function() {
       var classes, controls, cornerItem, editor, mousedown, onMousedown, onMousemove, onMouseup, resize, textarea, throttle,
-        _this = this;
+        _this;
       this.element.find('.annotator-resize').remove();
       if (this.element.hasClass(this.classes.invert.y)) {
         cornerItem = this.element.find('.annotator-item:last');
