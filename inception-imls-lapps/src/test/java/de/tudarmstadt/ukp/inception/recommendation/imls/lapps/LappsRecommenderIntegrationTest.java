@@ -120,7 +120,7 @@ public class LappsRecommenderIntegrationTest
             public MockResponse dispatch(RecordedRequest request) {
                 try {
                     String url = request.getPath();
-                    String body = request.getBody().readUtf8();
+                    //String body = request.getBody().readUtf8();
 
                     if (request.getPath().equals("/pos/predict")) {
                         String response = "";
