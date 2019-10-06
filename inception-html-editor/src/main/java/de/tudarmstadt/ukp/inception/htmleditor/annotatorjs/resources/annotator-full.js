@@ -2067,8 +2067,8 @@
   };
 
   parseToken = function(token) {
-    var payload, _ref3;
-    _ref3 = token.split('.'),payload = _ref3[1];
+    var head,payload, _ref3;
+    _ref3 = token.split('.'),head = _ref3[0], payload = _ref3[1];
     return JSON.parse(base64UrlDecode(payload));
   };
 
