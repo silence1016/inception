@@ -1090,7 +1090,7 @@
           if (!(h.parentNode != null)) {
             continue;
           }
-          child = h.childNodes[0];
+          //child = h.childNodes[0];
           $(h).replaceWith(h.childNodes);
         }
       }
@@ -2026,7 +2026,7 @@
       b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
       i = 0;
       ac = 0;
-      dec = "";
+     // dec = "";
       tmp_arr = [];
       if (!data) {
         return data;
@@ -2068,7 +2068,7 @@
 
   parseToken = function(token) {
     var head, payload, sig, _ref3;
-    _ref3 = token.split('.'), head = _ref3[0], payload = _ref3[1], sig = _ref3[2];
+    _ref3 = token.split('.'), payload = _ref3[1], sig = _ref3[2];
     return JSON.parse(base64UrlDecode(payload));
   };
 
@@ -2648,6 +2648,7 @@
         annotation.permissions = $.extend(true, {}, this.options.permissions);
       }
       dataKey = type + '-permissions';
+      console.log(dataKey);
       if ($(field).find('input').is(':checked')) {
         return annotation.permissions[type] = [];
       } else {
@@ -2774,6 +2775,8 @@
         annotation.permissions = this.options.permissions;
       }
       dataKey = type + '-permissions';
+      console.log(dataKey);
+      
       if ($(field).find('input').is(':checked')) {
         return annotation.permissions[type] = [type === 'read' ? this.options.groups.world : this.options.groups.consumer];
       } else {
