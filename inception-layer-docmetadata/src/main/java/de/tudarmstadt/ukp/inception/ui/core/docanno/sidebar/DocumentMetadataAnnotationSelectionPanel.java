@@ -141,7 +141,7 @@ public class DocumentMetadataAnnotationSelectionPanel extends Panel
         DocumentMetadataLayerAdapter adapter = (DocumentMetadataLayerAdapter) annotationService
                 .getAdapter(selectedLayer.getObject());
         CAS cas = jcasProvider.get();
-        AnnotationBaseFS fs = adapter.add(sourceDocument.getObject(), username.getObject(), cas);
+        adapter.add(sourceDocument.getObject(), username.getObject(), cas);
         
         annotationPage.writeEditorCas(cas);
         
