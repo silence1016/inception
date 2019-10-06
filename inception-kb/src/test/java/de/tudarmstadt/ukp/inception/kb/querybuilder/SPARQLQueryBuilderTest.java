@@ -197,7 +197,7 @@ public class SPARQLQueryBuilderTest
     @Before
     public void setUp()
     {
-        ValueFactory vf = SimpleValueFactory.getInstance();
+        //ValueFactory vf = SimpleValueFactory.getInstance();
         
         kb = new KnowledgeBase();
         kb.setDefaultLanguage("en");
