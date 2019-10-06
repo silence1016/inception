@@ -2057,7 +2057,8 @@
     var i, m, _k, _ref3;
     m = data.length % 4;
     if (m !== 0) {
-      for (i = _k = 0, _ref3 = 4 - m; 0 <= _ref3 ? _k < _ref3 : _k > _ref3; i = 0 <= _ref3 ? ++_k : --_k) {
+    	//assignments to local variable i are removed
+      for (_k = 0, _ref3 = 4 - m; 0 <= _ref3 ? _k < _ref3 : _k > _ref3; 0 <= _ref3 ? ++_k : --_k) {
         data += '=';
       }
     }
