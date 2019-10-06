@@ -117,6 +117,7 @@ public class IncrementalSplitterTest {
         @Test(expected = IllegalArgumentException.class)
         public void thatPercentageHasToBePercentage() {
             IncrementalSplitter splitter = new IncrementalSplitter(42.1337, 1, 10);
+			splitter=null;
         }
     }
 }
