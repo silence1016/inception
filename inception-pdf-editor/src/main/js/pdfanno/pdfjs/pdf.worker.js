@@ -16566,8 +16566,9 @@ var FlateStream = (function FlateStreamClosure() {
     }
     b = codeBuf & ((1 << bits) - 1);
     this.codeBuf = codeBuf >> bits;
-    this.codeSize = codeSize -= bits;
-
+    //this.codeSize = codeSize -= bits;
+    codeSize -= bits;
+    this.codeSize = codeSize;
     return b;
   };
 
@@ -18609,7 +18610,7 @@ var NullStream = (function NullStreamClosure() {
 
 // TODO refactor to remove dependency on parser.js
 function _setCoreParser(coreParser_) {
-  coreParser = coreParser_;
+//  coreParser = coreParser_;
   EOF = coreParser_.EOF;
   Lexer = coreParser_.Lexer;
 }
@@ -18617,7 +18618,7 @@ exports._setCoreParser = _setCoreParser;
 
 // TODO refactor to remove dependency on colorspace.js
 function _setCoreColorSpace(coreColorSpace_) {
-  coreColorSpace = coreColorSpace_;
+//  coreColorSpace = coreColorSpace_;
   ColorSpace = coreColorSpace_.ColorSpace;
 }
 exports._setCoreColorSpace = _setCoreColorSpace;
@@ -21435,7 +21436,7 @@ var FontRendererFactory = (function FontRendererFactoryClosure() {
 
 // TODO refactor to remove cyclic dependency on fonts.js
 function _setCoreFonts(coreFonts_) {
-  coreFonts = coreFonts_;
+  //coreFonts = coreFonts_;
   Encodings = coreFonts_.Encodings;
   CFFParser = coreFonts_.CFFParser;
 }
@@ -23151,7 +23152,7 @@ var BinaryCMapReader = (function BinaryCMapReaderClosure() {
           stream.readHex(start, dataSize);
           stream.readHexNumber(end, dataSize);
           addHex(end, start, dataSize);
-          code = stream.readNumber();
+          //code = stream.readNumber();
           // undefined range, skipping
           for (i = 1; i < subitemsCount; i++) {
             incHex(end, dataSize);
@@ -23159,7 +23160,7 @@ var BinaryCMapReader = (function BinaryCMapReaderClosure() {
             addHex(start, end, dataSize);
             stream.readHexNumber(end, dataSize);
             addHex(end, start, dataSize);
-            code = stream.readNumber();
+           // code = stream.readNumber();
             // nop
           }
           break;
@@ -31994,7 +31995,7 @@ var CFFParser = (function CFFParserClosure() {
       var encoding = {};
       var bytes = this.bytes;
       var predefined = false;
-      var hasSupplement = false;
+      //var hasSupplement = false;
       var format, i, ii;
       var raw = null;
 
@@ -32054,7 +32055,7 @@ var CFFParser = (function CFFParserClosure() {
           // StandardEncoding, that's a lie but that's ok.
           bytes[dataStart] &= 0x7f;
           readSupplement();
-          hasSupplement = true;
+          //hasSupplement = true;
         }
         raw = bytes.subarray(dataStart, dataEnd);
       }
@@ -35287,7 +35288,7 @@ var LabCS = (function LabCSClosure() {
 
 // TODO refactor to remove dependency on image.js
 function _setCoreImage(coreImage_) {
-  coreImage = coreImage_;
+  //coreImage = coreImage_;
   PDFImage = coreImage_.PDFImage;
 }
 exports._setCoreImage = _setCoreImage;
@@ -36858,7 +36859,7 @@ var getTilingPatternIR = corePattern.getTilingPatternIR;
 var CMapFactory = coreCMap.CMapFactory;
 var IdentityCMap = coreCMap.IdentityCMap;
 var Metrics = coreMetrics.Metrics;
-var bidi = coreBidi.bidi;
+//var bidi = coreBidi.bidi;
 
 var PartialEvaluator = (function PartialEvaluatorClosure() {
   function PartialEvaluator(pdfManager, xref, handler, pageIndex,
@@ -37527,7 +37528,7 @@ var PartialEvaluator = (function PartialEvaluatorClosure() {
               }
               if (imageCache[name] !== undefined) {
                 operatorList.addOp(imageCache[name].fn, imageCache[name].args);
-                args = null;
+             //   args = null;
                 continue;
               }
 
@@ -37551,7 +37552,7 @@ var PartialEvaluator = (function PartialEvaluatorClosure() {
                 } else if (type.name === 'Image') {
                   self.buildPaintImageXObject(resources, xobj, false,
                     operatorList, name, imageCache);
-                  args = null;
+                //  args = null;
                   continue;
                 } else if (type.name === 'PS') {
                   // PostScript XObjects are unused when viewing documents.
@@ -37579,13 +37580,13 @@ var PartialEvaluator = (function PartialEvaluatorClosure() {
                 var cacheEntry = imageCache[cacheKey];
                 if (cacheEntry !== undefined) {
                   operatorList.addOp(cacheEntry.fn, cacheEntry.args);
-                  args = null;
+               //   args = null;
                   continue;
                 }
               }
               self.buildPaintImageXObject(resources, args[0], true,
                 operatorList, cacheKey, imageCache);
-              args = null;
+            //  args = null;
               continue;
             case OPS.showText:
               args[0] = self.handleText(args[0], stateManager.state);
