@@ -8944,6 +8944,7 @@ var NetworkManager = (function NetworkManagerClosure() {
 
     hasPendingRequests: function NetworkManager_hasPendingRequests() {
       for (var xhrId in this.pendingRequests) {
+		  xhrId=undefined;
         return true;
       }
       return false;
@@ -13241,7 +13242,7 @@ var Jbig2Image = (function Jbig2ImageClosure() {
       header.numberOfPages = readUint32(data, position);
       position += 4;
     }
-    var segments = readSegments(header, data, position, end);
+    //var segments = readSegments(header, data, position, end);
     error('Not implemented');
     // processSegments(segments, new SimpleSegmentVisitor());
   }
@@ -28625,7 +28626,7 @@ var Font = (function FontClosure() {
         var start = (font.start ? font.start : 0) + cmap.offset;
         font.pos = start;
 
-        var version = font.getUint16();
+        //var version = font.getUint16();
         var numTables = font.getUint16();
 
         var potentialTable;
@@ -30510,7 +30511,7 @@ var Type1CharString = (function Type1CharStringClosure() {
               // first part of the charstring and then use rmoveto with
               // (dx, dy). The height argument will not be used for vmtx and
               // vhea tables reconstruction -- ignoring it.
-              var wy = this.stack.pop();
+              //var wy = this.stack.pop();
               wx = this.stack.pop();
               var sby = this.stack.pop();
               sbx = this.stack.pop();
@@ -30832,7 +30833,7 @@ var Type1Parser = (function Type1ParserClosure() {
           case 'Subrs':
             var num = this.readInt();
             this.getToken(); // read in 'array'
-            while ((token = this.getToken()) === 'dup') {
+            while ((this.getToken()) === 'dup') {
               var index = this.readInt();
               length = this.readInt();
               this.getToken(); // read in 'RD' or '-|'
@@ -37940,12 +37941,12 @@ var PartialEvaluator = (function PartialEvaluatorClosure() {
           if (font.vertical) {
             if (glyph.vmetric) {
               glyphWidth = glyph.vmetric[0];
-              vMetricX = glyph.vmetric[1];
-              vMetricY = glyph.vmetric[2];
+              //vMetricX = glyph.vmetric[1];
+              //vMetricY = glyph.vmetric[2];
             } else {
               glyphWidth = glyph.width;
-              vMetricX = glyph.width * 0.5;
-              vMetricY = defaultVMetrics[2];
+              //vMetricX = glyph.width * 0.5;
+              //vMetricY = defaultVMetrics[2];
             }
           } else {
             glyphWidth = glyph.width;
