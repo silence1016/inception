@@ -34,7 +34,7 @@ window.findIndex = function (page, point) {
       continue
     }
 
-    const { position, char, x, y, w, h } = extractMeta(info)
+    const { position,x, y, w, h } = extractMeta(info)
 
     if (y <= point.y && point.y <= (y + h)) {
       if (x <= point.x && point.x <= x + w / 2) {
