@@ -381,7 +381,7 @@ public class DL4JSequenceRecommender
             Type predictedType = getPredictedType(aCas);
             Type tokenType = getType(aCas, Token.class);
 
-            Feature scoreFeature = getScoreFeature(aCas);
+            //Feature scoreFeature = getScoreFeature(aCas);
             Feature predictedFeature = getPredictedFeature(aCas);
             Feature isPredictionFeature = getIsPredictionFeature(aCas);
     

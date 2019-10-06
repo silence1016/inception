@@ -3282,7 +3282,7 @@ FontLoader.prototype = {
     var styleElement = this.styleElement;
     if (styleElement) {
       styleElement.parentNode.removeChild(styleElement);
-      styleElement = this.styleElement = null;
+      this.styleElement = null;
     }
     this.nativeFontFaces.forEach(function(nativeFontFace) {
       document.fonts.delete(nativeFontFace);
