@@ -26,7 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.text.Highlighter;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
@@ -84,6 +86,7 @@ import de.tudarmstadt.ukp.inception.externalsearch.HighlightUtils;
 import de.tudarmstadt.ukp.inception.externalsearch.event.ExternalSearchQueryEvent;
 import de.tudarmstadt.ukp.inception.externalsearch.model.DocumentRepository;
 import de.tudarmstadt.ukp.inception.support.annotation.OffsetSpan;
+import eu.openminted.share.annotations.api.Component;
 
 public class ExternalSearchAnnotationSidebar
     extends AnnotationSidebar_ImplBase
@@ -169,6 +172,17 @@ public class ExternalSearchAnnotationSidebar
                 @SuppressWarnings("rawtypes") Item rowItem = cellItem.findParent(Item.class);
                 int rowIndex = rowItem.getIndex();
                 ResultRowView rowView = new ResultRowView(componentId, rowIndex + 1, model);
+				if (searchState.getSelectedResult() != null && (searchState.getSelectedResult().getDocumentId()
+						.equals(getAnnotationPage().getModelObject().getDocument().getName()))) {
+					String documentTitle=searchState.getSelectedResult().getDocumentTitle();
+					if (documentTitle.equals(rowView.title)) {
+						documentTitle="<mark>"+documentTitle+"</mark>";
+						rowView.link.add(new Label("title",documentTitle).setEscapeModelStrings(false));
+					}else {
+						Label label = new Label("title", rowView.title);
+						rowView.link.add(label);
+					}
+				}
                 cellItem.add(rowView);
             }
         });
@@ -373,18 +387,18 @@ public class ExternalSearchAnnotationSidebar
         extends Panel
     {
         private static final long serialVersionUID = 6212628948731147733L;
-
+        public LambdaAjaxLink link;
+		public String title;
         public ResultRowView(String id, long rowNumber, IModel<ExternalSearchResult> model)
         {
             super(id, model);
 
             ExternalSearchResult result = (ExternalSearchResult) getDefaultModelObject();
-
+            ExternalSearchUserState searchState = searchStateModel.getObject();
             boolean existsSourceDocument = documentService.existsSourceDocument(project,
                     result.getDocumentId());
 
             // Import and open annotation
-            LambdaAjaxLink link;
             if (!existsSourceDocument) {
                 link = new LambdaAjaxLink("docLink", t -> actionImport(t, result));
             }
@@ -393,13 +407,16 @@ public class ExternalSearchAnnotationSidebar
                 link = new LambdaAjaxLink("docLink", t -> actionOpen(t, result));
             }
 
-            String title = defaultIfBlank(result.getDocumentTitle(),
+            title = defaultIfBlank(result.getDocumentTitle(),
                 defaultIfBlank(result.getDocumentId(),
                     defaultIfBlank(result.getOriginalUri(), "<no title>")));
 
             add(link);
 
-            link.add(new Label("title", title));
+             if (searchState.getSelectedResult() == null) {
+				Label label = new Label("title", title);
+				link.add(label);
+			}
             link.add(new Label("score", result.getScore()));
             link.add(new Label("importStatus",
                 () -> existsSourceDocument ? "imported" : "not imported"));
