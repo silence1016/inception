@@ -27,7 +27,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommendationException;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UIMAException;
 import org.apache.uima.UIMAFramework;
@@ -49,6 +48,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.tudarmstadt.ukp.inception.recommendation.api.model.Recommender;
+import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommendationException;
 import de.tudarmstadt.ukp.inception.recommendation.api.recommender.RecommenderContext;
 import de.tudarmstadt.ukp.inception.recommendation.imls.stringmatch.StringMatchingRecommender;
 import de.tudarmstadt.ukp.inception.recommendation.imls.stringmatch.StringMatchingRecommenderTraits;
@@ -74,7 +74,6 @@ public class RemoteStringMatchingNerRecommender
     }
 
     public void train(String aTrainingRequestJson) throws UIMAException, SAXException, IOException, RecommendationException
-
     {
         TrainingRequest request = deserializeTrainingRequest(aTrainingRequestJson);
 
