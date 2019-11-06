@@ -62,6 +62,10 @@ public class AnnotationSuggestion
      */
     public static final int FLAG_TRANSIENT_CORRECTED = 1 << 5;
     
+    public static final int FLAG_ALL = FLAG_OVERLAP | FLAG_SKIPPED | FLAG_REJECTED
+            | FLAG_TRANSIENT_ACCEPTED | FLAG_TRANSIENT_REJECTED | FLAG_TRANSIENT_CORRECTED;
+    
+    
     private final int id;
 
     private final long recommenderId;
@@ -78,7 +82,7 @@ public class AnnotationSuggestion
     private final String label;
     private final String uiLabel;
     private final double confidence;
-    private final Optional<String> confidenceExplanation;
+    private final String confidenceExplanation;
 
     private int hidingFlags = 0;
 
@@ -94,7 +98,7 @@ public class AnnotationSuggestion
         feature = aFeature;
         recommenderName = aRecommenderName;
         confidence = aConfidence;
-        confidenceExplanation = Optional.ofNullable(aConfidenceExplanation);
+        confidenceExplanation = aConfidenceExplanation;
         recommenderId = aRecommenderId;
         begin = aBegin;
         end = aEnd;
@@ -186,7 +190,7 @@ public class AnnotationSuggestion
     
     public Optional<String> getConfidenceExplanation() 
     {
-        return confidenceExplanation;
+        return Optional.ofNullable(confidenceExplanation);
     }
 
     public long getRecommenderId()
