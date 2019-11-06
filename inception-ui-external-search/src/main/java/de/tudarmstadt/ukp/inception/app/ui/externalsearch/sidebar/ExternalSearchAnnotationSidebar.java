@@ -172,15 +172,14 @@ public class ExternalSearchAnnotationSidebar
                 @SuppressWarnings("rawtypes") Item rowItem = cellItem.findParent(Item.class);
                 int rowIndex = rowItem.getIndex();
                 ResultRowView rowView = new ResultRowView(componentId, rowIndex + 1, model);
-				if (searchState.getSelectedResult() != null && (searchState.getSelectedResult().getDocumentId()
-						.equals(getAnnotationPage().getModelObject().getDocument().getName()))) {
-					String documentTitle=searchState.getSelectedResult().getDocumentTitle();
-					if (documentTitle.equals(rowView.title)) {
-						documentTitle="<mark>"+documentTitle+"</mark>";
-						rowView.link.add(new Label("title",documentTitle).setEscapeModelStrings(false));
+				
+				if (getAnnotationPage().getModelObject().getDocument().getName()!=null) {
+					String documentTitle=getAnnotationPage().getModelObject().getDocument().getName();
+					if (documentTitle.equals(rowView.documentID)) {
+						String documentTitle1="<mark>"+rowView.title+"</mark>";
+						rowView.link.add(new Label("title",documentTitle1).setEscapeModelStrings(false));
 					}else {
-						Label label = new Label("title", rowView.title);
-						rowView.link.add(label);
+						rowView.link.add(new Label("title", rowView.title));
 					}
 				}
                 cellItem.add(rowView);
@@ -387,14 +386,15 @@ public class ExternalSearchAnnotationSidebar
         extends Panel
     {
         private static final long serialVersionUID = 6212628948731147733L;
-        public LambdaAjaxLink link;
-		public String title;
+        private LambdaAjaxLink link;
+		private String title;
+		private String documentID;
         public ResultRowView(String id, long rowNumber, IModel<ExternalSearchResult> model)
         {
             super(id, model);
 
             ExternalSearchResult result = (ExternalSearchResult) getDefaultModelObject();
-            ExternalSearchUserState searchState = searchStateModel.getObject();
+            
             boolean existsSourceDocument = documentService.existsSourceDocument(project,
                     result.getDocumentId());
 
@@ -410,10 +410,10 @@ public class ExternalSearchAnnotationSidebar
             title = defaultIfBlank(result.getDocumentTitle(),
                 defaultIfBlank(result.getDocumentId(),
                     defaultIfBlank(result.getOriginalUri(), "<no title>")));
-
+                documentID=result.getDocumentId();
             add(link);
 
-             if (searchState.getSelectedResult() == null) {
+             if ((getAnnotationPage().getModelObject().getDocument().getName())==null) {
 				Label label = new Label("title", title);
 				link.add(label);
 			}
