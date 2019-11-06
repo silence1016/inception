@@ -163,6 +163,14 @@ public class SelectionTask
 
                     DataSplitter splitter = new PercentageBasedSplitter(0.8, 10);
                     EvaluationResult result = recommendationEngine.evaluate(casses.get(), splitter);
+                    
+                    if (result.isEvaluationSkipped()) {
+                        log.info("[{}][{}]: Evaluation could not be performed: {}",
+                                user.getUsername(), recommenderName,
+                                result.getErrorMsg().orElse("unknown reason"));
+                        continue;
+                    }
+                    
                     double score = result.computeF1Score();
 
                     Double threshold = recommender.getThreshold();
@@ -214,7 +222,7 @@ public class SelectionTask
         for (SourceDocument document : documentService.listSourceDocuments(aProject)) {
             try {
                 CAS cas = documentService.readAnnotationCas(document, aUserName);
-                annoService.upgradeCasIfRequired(cas, document, aUserName);
+                annoService.upgradeCasIfRequired(cas, document);
                 casses.add(cas);
             } catch (IOException e) {
                 log.error("Cannot read annotation CAS.", e);
